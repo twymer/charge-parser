@@ -3,8 +3,6 @@
 
 require 'pry'
 
-original_input = "$4.99 TXT MESSAGING – 250 09/29 – 10/28 4.99"
-
 class ChargeParser
   price_matcher = /\d*\.\d{2}/
   date_matcher = /\d{1,2}\/\d{1,2}/
@@ -20,8 +18,11 @@ class ChargeParser
   def self.parse(input)
     parsed = input.scan(@matcher)
     if parsed.any?
-      parsed.first[0].strip!
+      return { feature: parsed.first[0].strip,
+               date_range: parsed.first[1],
+               price: parsed.first[2] }
+    else
+      return []
     end
-    return parsed
   end
 end
