@@ -9,6 +9,6 @@ if ARGV[0]
       puts ChargeParser.parse(line).to_json
     end
   end
-else 
+else
   puts "Please pass a filename"
 end
