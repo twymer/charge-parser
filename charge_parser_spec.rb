@@ -53,4 +53,15 @@ describe ChargeParser do
     result = ChargeParser.parse(charge_line({feature: '', dates: 'banana', price: 'oops'}))
     result.should == []
   end
+
+  it "should not parse if price field is missing" do
+    result = ChargeParser.parse(charge_line(price: ''))
+    result.should == []
+  end
+
+  it "should still parse even with no feature" do
+    result = ChargeParser.parse(charge_line(feature: ''))
+    result[:feature] == ''
+    result[:date_range] == @default_dates
+  end
 end
